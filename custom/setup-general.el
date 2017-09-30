@@ -55,21 +55,22 @@
 ;; (use-package monokai-theme)
 
 ;; solarized-theme
-(use-package color-theme-solarized)
-
-(defun set-solarized-light ()
-  (interactive)
-  (customize-set-variable 'frame-background-mode 'light)
+(use-package color-theme-solarized
+  :init
+  (use-package color-theme)
+  :config
+  (defun set-solarized-light ()
+    (interactive)
+    (customize-set-variable 'frame-background-mode 'light)
+    (load-theme 'solarized t))
+  (defun set-solarized-dark ()
+    (interactive)
+    (customize-set-variable 'frame-background-mode 'dark)
+    (load-theme 'solarized t))
+  ;; color theme
+  (global-set-key (kbd "C-c l") 'set-solarized-light)
+  (global-set-key (kbd "C-c d") 'set-solarized-dark)
   (load-theme 'solarized t))
-
-(defun set-solarized-dark ()
-  (interactive)
-  (customize-set-variable 'frame-background-mode 'dark)
-  (load-theme 'solarized t))
-
-;; color theme
-(global-set-key (kbd "C-c l") 'set-solarized-light)
-(global-set-key (kbd "C-c d") 'set-solarized-dark)
 
 ;; smartparens settings
 (use-package smartparens
