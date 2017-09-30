@@ -1,6 +1,6 @@
-Emacs Configuration
+# Emacs Configuration
 
-My emacs configuration.
+This is my emacs configuration.
 
-# Reference
+## Reference
 * http://tuhdo.github.io/c-ide.html
