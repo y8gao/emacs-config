@@ -25,6 +25,12 @@
 ;; disable make-backups
 (setq make-backup-files nil)
 
+; modify syntax table to make underscore is in one word
+(add-hook 'after-change-major-mode-hook 'modify-syntax-table-for-underscore)
+
+;; <F2> open emacs init file
+(global-set-key (kbd "<f2>") 'open-init-file)
+
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook
           (lambda () (interactive)
@@ -72,24 +78,27 @@
   (global-set-key (kbd "C-c d") 'set-solarized-dark)
   (load-theme 'solarized t))
 
+
 ;; smartparens settings
 (use-package smartparens
-  :commands (smartparens-config)
+  ;; :commands (smartparens-config)
   :config
   (smartparens-global-mode t))
-
 
 ;; popwin settings
 (use-package popwin
   :config
   (popwin-mode 1))
 
-
 ;; sr-speedbar
 (use-package sr-speedbar
   :config
   (setq sr-speedbar-right-side nil)
-  (setq sr-speedbar-max-width 40))
+  (setq sr-speedbar-max-width 40)
+  (setq dframe-update-speed t)
+  (global-set-key (kbd "<f3>") (lambda()
+                                 (interactive)
+                                 (sr-speedbar-toggle))))
 
 ;; company
 (use-package company
@@ -110,13 +119,13 @@
   :bind (("C-x 1" . zygospore-toggle-delete-other-windows)
          ("RET" .   newline-and-indent)))
 
-  ; automatically indent when press RET
+;; Evil mode
+(use-package evil
+  :config
+  (evil-mode 1))
 
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-c w") 'whitespace-mode)
-
-;; 这一行代码，将函数 open-init-file 绑定到 <f2> 键上
-(global-set-key (kbd "<f2>") 'open-init-file)
 
 (windmove-default-keybindings)
 
